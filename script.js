@@ -92,8 +92,11 @@ function handleMove(e) {
     const deltaX = clientX - lastInputPos.x;
     const deltaY = clientY - lastInputPos.y;
     
-    cubeRotation.y += deltaX * 0.5;
-    cubeRotation.x -= deltaY * 0.5;
+    // Increase sensitivity slightly for touch events
+    const sensitivity = e.touches ? 0.8 : 0.5;
+    
+    cubeRotation.y += deltaX * sensitivity;
+    cubeRotation.x -= deltaY * sensitivity;
     
     cubeElement.style.transform = `rotateX(${cubeRotation.x}deg) rotateY(${cubeRotation.y}deg)`;
     lastInputPos = { x: clientX, y: clientY };
