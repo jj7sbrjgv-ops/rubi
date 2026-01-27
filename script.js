@@ -50,8 +50,8 @@ function createCubilet(x, y, z) {
         if (face === 'down' && y < size - 1) isInternal = true;
         if (face === 'left' && x > 0) isInternal = true;
         if (face === 'right' && x < size - 1) isInternal = true;
-        if (face === 'front' && z > 0) isInternal = true;
-        if (face === 'back' && z < size - 1) isInternal = true;
+        if (face === 'front' && z < size - 1) isInternal = true;
+        if (face === 'back' && z > 0) isInternal = true;
         
         if (isInternal) faceEl.classList.add('internal');
         
