@@ -68,32 +68,50 @@ function createCubilet(x, y, z) {
     });
 }
 
-// Global Rotation (Drag)
+// Input handling (Mouse & Touch)
 let isDragging = false;
-let lastMousePos = { x: 0, y: 0 };
+let lastInputPos = { x: 0, y: 0 };
 
-document.addEventListener('mousedown', (e) => {
+function handleStart(e) {
     if (e.target.closest('.controls') || e.target.closest('button')) return;
     isDragging = true;
-    lastMousePos = { x: e.clientX, y: e.clientY };
-});
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    lastInputPos = { x: clientX, y: clientY };
+}
 
-document.addEventListener('mousemove', (e) => {
+function handleMove(e) {
     if (!isDragging) return;
     
-    const deltaX = e.clientX - lastMousePos.x;
-    const deltaY = e.clientY - lastMousePos.y;
+    // Prevent scrolling
+    if (e.cancelable) e.preventDefault();
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    const deltaX = clientX - lastInputPos.x;
+    const deltaY = clientY - lastInputPos.y;
     
     cubeRotation.y += deltaX * 0.5;
     cubeRotation.x -= deltaY * 0.5;
     
     cubeElement.style.transform = `rotateX(${cubeRotation.x}deg) rotateY(${cubeRotation.y}deg)`;
-    lastMousePos = { x: e.clientX, y: e.clientY };
-});
+    lastInputPos = { x: clientX, y: clientY };
+}
 
-document.addEventListener('mouseup', () => {
+function handleEnd() {
     isDragging = false;
-});
+}
+
+// Mouse events
+document.addEventListener('mousedown', handleStart);
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('mouseup', handleEnd);
+
+// Touch events
+document.addEventListener('touchstart', handleStart, { passive: false });
+document.addEventListener('touchmove', handleMove, { passive: false });
+document.addEventListener('touchend', handleEnd);
 
 // Layer Rotation Logic
 function rotateLayer(face) {

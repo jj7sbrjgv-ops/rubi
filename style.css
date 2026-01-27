@@ -3,14 +3,20 @@
     --text-color: #ffffff;
     --cube-size: 60px;
     --gap: 2px;
-    
+
     /* Cube colors */
-    --color-u: #ffffff; /* Up - White */
-    --color-d: #ffd500; /* Down - Yellow */
-    --color-l: #ff5800; /* Left - Orange */
-    --color-r: #c41e3a; /* Right - Red */
-    --color-f: #009b48; /* Front - Green */
-    --color-b: #0046ad; /* Back - Blue */
+    --color-u: #ffffff;
+    /* Up - White */
+    --color-d: #ffd500;
+    /* Down - Yellow */
+    --color-l: #ff5800;
+    /* Left - Orange */
+    --color-r: #c41e3a;
+    /* Right - Red */
+    --color-f: #009b48;
+    /* Front - Green */
+    --color-b: #0046ad;
+    /* Back - Blue */
     --color-internal: #000000;
 }
 
@@ -23,8 +29,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+    touch-action: none;
+    /* Prevent scrolling during interaction */
 }
 
 .container {
@@ -40,9 +48,12 @@ h1 {
 .scene {
     width: 300px;
     height: 300px;
+    max-width: 80vw;
+    max-height: 80vw;
     perspective: 1000px;
     margin: 0 auto;
     cursor: grab;
+    user-select: none;
 }
 
 .scene:active {
@@ -77,21 +88,47 @@ h1 {
 }
 
 /* Face positions */
-.face.up    { transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-u); }
-.face.down  { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-d); }
-.face.left  { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-l); }
-.face.right { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-r); }
-.face.front { transform: translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-f); }
-.face.back  { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-b); }
+.face.up {
+    transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
+    background-color: var(--color-u);
+}
+
+.face.down {
+    transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
+    background-color: var(--color-d);
+}
+
+.face.left {
+    transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
+    background-color: var(--color-l);
+}
+
+.face.right {
+    transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
+    background-color: var(--color-r);
+}
+
+.face.front {
+    transform: translateZ(calc(var(--cube-size) / 2));
+    background-color: var(--color-f);
+}
+
+.face.back {
+    transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2));
+    background-color: var(--color-b);
+}
 
 /* Internal faces */
-.face.internal { background-color: var(--color-internal); }
+.face.internal {
+    background-color: var(--color-internal);
+}
 
 .controls {
     margin-top: 2rem;
 }
 
-.rotation-buttons, .action-buttons {
+.rotation-buttons,
+.action-buttons {
     margin-bottom: 1rem;
 }
 
@@ -99,12 +136,14 @@ button {
     background: #333;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 18px;
     margin: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: background 0.2s, transform 0.1s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button:hover {
@@ -112,7 +151,7 @@ button:hover {
 }
 
 button:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
 #shuffleBtn {
@@ -131,9 +170,26 @@ button:active {
     margin-top: 1rem;
     font-size: 0.9rem;
     opacity: 0.7;
+    padding: 0 1rem;
 }
 
 /* Specific rotation classes will be added via JS */
 .rotating {
     transition: transform 0.4s ease-in-out;
+}
+
+@media (max-width: 480px) {
+    :root {
+        --cube-size: 50px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .rotation-buttons button {
+        padding: 10px 14px;
+        margin: 3px;
+    }
 }
