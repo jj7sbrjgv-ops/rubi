@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rubik's Cube</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>3D Rubik's Cube</h1>
+        <div class="scene">
+            <div class="cube" id="cube">
+                <!-- 27個のピース（キュービレット）がここにJavaScriptで生成されます -->
+            </div>
+        </div>
+        <div class="controls">
+            <div class="rotation-buttons">
+                <button onclick="rotateLayer('U')">U</button>
+                <button onclick="rotateLayer('D')">D</button>
+                <button onclick="rotateLayer('L')">L</button>
+                <button onclick="rotateLayer('R')">R</button>
+                <button onclick="rotateLayer('F')">F</button>
+                <button onclick="rotateLayer('B')">B</button>
+            </div>
+            <div class="action-buttons">
+                <button id="shuffleBtn">Shuffle</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+        </div>
+        <div class="instructions">
+            <p>Drag to rotate the cube. Use buttons to rotate layers.</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

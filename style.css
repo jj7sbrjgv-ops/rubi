@@ -1,0 +1,139 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --cube-size: 60px;
+    --gap: 2px;
+    
+    /* Cube colors */
+    --color-u: #ffffff; /* Up - White */
+    --color-d: #ffd500; /* Down - Yellow */
+    --color-l: #ff5800; /* Left - Orange */
+    --color-r: #c41e3a; /* Right - Red */
+    --color-f: #009b48; /* Front - Green */
+    --color-b: #0046ad; /* Back - Blue */
+    --color-internal: #000000;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.scene {
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
+    margin: 0 auto;
+    cursor: grab;
+}
+
+.scene:active {
+    cursor: grabbing;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(45deg);
+    transition: transform 0.1s ease-out;
+}
+
+.cubilet {
+    position: absolute;
+    width: var(--cube-size);
+    height: var(--cube-size);
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.face {
+    position: absolute;
+    width: var(--cube-size);
+    height: var(--cube-size);
+    border: 3px solid #000;
+    box-sizing: border-box;
+    border-radius: 6px;
+    backface-visibility: hidden;
+}
+
+/* Face positions */
+.face.up    { transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-u); }
+.face.down  { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-d); }
+.face.left  { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-l); }
+.face.right { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-r); }
+.face.front { transform: translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-f); }
+.face.back  { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); background-color: var(--color-b); }
+
+/* Internal faces */
+.face.internal { background-color: var(--color-internal); }
+
+.controls {
+    margin-top: 2rem;
+}
+
+.rotation-buttons, .action-buttons {
+    margin-bottom: 1rem;
+}
+
+button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #444;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+#shuffleBtn {
+    background: #007bff;
+}
+
+#shuffleBtn:hover {
+    background: #0056b3;
+}
+
+#resetBtn {
+    background: #6c757d;
+}
+
+.instructions {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Specific rotation classes will be added via JS */
+.rotating {
+    transition: transform 0.4s ease-in-out;
+}
