@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- 文字コードとレスポンシブ表示の基本設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ブラウザタブに表示されるタイトル -->
     <title>3D Rubik's Cube</title>
+    <!-- 見た目を定義するCSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- アプリ全体のレイアウトコンテナ -->
     <div class="container">
+        <!-- ページ見出し -->
         <h1>3D Rubik's Cube</h1>
+        <!-- 3D表示のための視点(perspective)を持つ領域 -->
         <div class="scene">
+            <!-- キューブ本体: 中身の27ピースはJSで生成される -->
             <div class="cube" id="cube">
                 <!-- 27個のピース（キュービレット）がここにJavaScriptで生成されます -->
             </div>
         </div>
+        <!-- 操作ボタン群 -->
         <div class="controls">
+            <!-- 各面を回すボタン(U/D/L/R/F/B) -->
             <div class="rotation-buttons">
                 <button onclick="rotateLayer('U')">U</button>
                 <button onclick="rotateLayer('D')">D</button>
@@ -23,15 +32,18 @@
                 <button onclick="rotateLayer('F')">F</button>
                 <button onclick="rotateLayer('B')">B</button>
             </div>
+            <!-- 補助操作(シャッフル/リセット) -->
             <div class="action-buttons">
                 <button id="shuffleBtn">Shuffle</button>
                 <button id="resetBtn">Reset</button>
             </div>
         </div>
+        <!-- 操作説明テキスト -->
         <div class="instructions">
             <p>Drag to rotate the cube. Use buttons to rotate layers.</p>
         </div>
     </div>
+    <!-- キューブ生成と操作ロジック -->
     <script src="script.js"></script>
 </body>
 </html>

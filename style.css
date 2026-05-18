@@ -1,26 +1,29 @@
 :root {
+    /* 全体テーマとサイズに使う変数 */
     --bg-color: #1a1a1a;
     --text-color: #ffffff;
     --cube-size: 60px;
     --gap: 2px;
 
-    /* Cube colors */
+    /* 各面の色定義 */
     --color-u: #ffffff;
-    /* Up - White */
+    /* 上面: 白 */
     --color-d: #ffd500;
-    /* Down - Yellow */
+    /* 下面: 黄 */
     --color-l: #ff5800;
-    /* Left - Orange */
+    /* 左面: オレンジ */
     --color-r: #c41e3a;
-    /* Right - Red */
+    /* 右面: 赤 */
     --color-f: #009b48;
-    /* Front - Green */
+    /* 前面: 緑 */
     --color-b: #0046ad;
-    /* Back - Blue */
+    /* 背面: 青 */
+    /* 内側の面の色 */
     --color-internal: #000000;
 }
 
 body {
+    /* 画面中央にコンテンツを配置 */
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,20 +35,23 @@ body {
     min-height: 100vh;
     overflow: hidden;
     touch-action: none;
-    /* Prevent scrolling during interaction */
+    /* 操作中のスクロールを抑制 */
 }
 
 .container {
+    /* テキストやボタンを中央寄せ */
     text-align: center;
 }
 
 h1 {
+    /* 見出しの余白と文字感を調整 */
     margin-bottom: 2rem;
     font-weight: 300;
     letter-spacing: 2px;
 }
 
 .scene {
+    /* 3D表示の視点を持つ描画領域 */
     width: 300px;
     height: 300px;
     max-width: 80vw;
@@ -57,10 +63,12 @@ h1 {
 }
 
 .scene:active {
+    /* ドラッグ中カーソル */
     cursor: grabbing;
 }
 
 .cube {
+    /* キューブ全体の3Dコンテナ */
     width: 100%;
     height: 100%;
     position: relative;
@@ -70,6 +78,7 @@ h1 {
 }
 
 .cubilet {
+    /* 各小キューブ(キューブレット) */
     position: absolute;
     width: var(--cube-size);
     height: var(--cube-size);
@@ -78,6 +87,7 @@ h1 {
 }
 
 .face {
+    /* キューブレットの1面共通スタイル */
     position: absolute;
     width: var(--cube-size);
     height: var(--cube-size);
@@ -87,7 +97,7 @@ h1 {
     backface-visibility: hidden;
 }
 
-/* Face positions */
+/* 各面の向きと色を定義 */
 .face.up {
     transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
     background-color: var(--color-u);
@@ -118,21 +128,24 @@ h1 {
     background-color: var(--color-b);
 }
 
-/* Internal faces */
+/* 外から見えない内部面 */
 .face.internal {
     background-color: var(--color-internal);
 }
 
 .controls {
+    /* ボタンエリア上部余白 */
     margin-top: 2rem;
 }
 
 .rotation-buttons,
 .action-buttons {
+    /* ボタン行ごとの余白 */
     margin-bottom: 1rem;
 }
 
 button {
+    /* ボタン共通見た目 */
     background: #333;
     color: white;
     border: none;
@@ -147,38 +160,45 @@ button {
 }
 
 button:hover {
+    /* ホバー時の明るさ変化 */
     background: #444;
 }
 
 button:active {
+    /* 押下時の縮小感 */
     transform: scale(0.92);
 }
 
 #shuffleBtn {
+    /* シャッフルボタン色 */
     background: #007bff;
 }
 
 #shuffleBtn:hover {
+    /* シャッフルボタンのホバー色 */
     background: #0056b3;
 }
 
 #resetBtn {
+    /* リセットボタン色 */
     background: #6c757d;
 }
 
 .instructions {
+    /* 画面下の補助説明テキスト */
     margin-top: 1rem;
     font-size: 0.9rem;
     opacity: 0.7;
     padding: 0 1rem;
 }
 
-/* Specific rotation classes will be added via JS */
+/* JSで必要に応じて付与する回転用クラス */
 .rotating {
     transition: transform 0.4s ease-in-out;
 }
 
 @media (max-width: 600px) {
+    /* スマホ向け: キューブと見出し/ボタンを少し小さくする */
     :root {
         --cube-size: 50px;
     }
